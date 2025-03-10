@@ -1,0 +1,36 @@
+SELECT TOP (1000) [ID_CLIENTE]
+      ,[NOMBRE]
+      ,[CIUDAD]
+      ,[ID_PROD]
+      ,[ID_VENTA]
+      ,[CANTIDAD]
+      ,[NOMBREPROD]
+      ,[PRECIOUNIT]
+      ,[PRECIOTOTAL]
+      ,[COD_PAIS]
+  FROM [Desafio1].[dbo].[Frecuentes]
+
+
+SELECT TOP 10
+    ID_CLIENTE,
+    NOMBRE,
+    SUM(PRECIOTOTAL) AS TOTAL_GASTADO
+FROM Frecuentes
+GROUP BY ID_CLIENTE, NOMBRE
+ORDER BY TOTAL_GASTADO DESC
+
+ SELECT 
+    CIUDAD,
+    COUNT(ID_CLIENTE) AS TotalClientesFrecuentes
+FROM Frecuentes
+GROUP BY CIUDAD
+ORDER BY TotalClientesFrecuentes DESC;
+
+SELECT TOP 10
+    ID_PROD,
+    NOMBREPROD,
+    SUM(CANTIDAD) AS TotalUnidadesVendidas,
+    SUM(PRECIOTOTAL) AS TotalIngresos
+FROM Frecuentes
+GROUP BY ID_PROD, NOMBREPROD
+ORDER BY TotalUnidadesVendidas DESC;
